@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34322.80
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetHotel.WebAPI", "PetHotel.WebAPI\PetHotel.WebAPI.csproj", "{24EB6468-235F-4F46-A0DD-00C8B1786EEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetHotel.WebAPI", "PetHotel.WebAPI\PetHotel.WebAPI.csproj", "{24EB6468-235F-4F46-A0DD-00C8B1786EEA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetHotel.Data", "PetHotel.Data\PetHotel.Data.csproj", "{B82C8A46-2600-483E-8C2D-131EC3708B39}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetHotel.Domain", "PetHotel.Domain\PetHotel.Domain.csproj", "{18E7D83C-3B99-4368-9EF3-E3D7AA02B805}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetHotel.Application", "PetHotel.Application\PetHotel.Application.csproj", "{91CE8DDF-E5E8-40F7-AF11-5716192F18DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{24EB6468-235F-4F46-A0DD-00C8B1786EEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24EB6468-235F-4F46-A0DD-00C8B1786EEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24EB6468-235F-4F46-A0DD-00C8B1786EEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B82C8A46-2600-483E-8C2D-131EC3708B39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B82C8A46-2600-483E-8C2D-131EC3708B39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B82C8A46-2600-483E-8C2D-131EC3708B39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B82C8A46-2600-483E-8C2D-131EC3708B39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18E7D83C-3B99-4368-9EF3-E3D7AA02B805}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18E7D83C-3B99-4368-9EF3-E3D7AA02B805}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18E7D83C-3B99-4368-9EF3-E3D7AA02B805}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18E7D83C-3B99-4368-9EF3-E3D7AA02B805}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91CE8DDF-E5E8-40F7-AF11-5716192F18DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91CE8DDF-E5E8-40F7-AF11-5716192F18DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91CE8DDF-E5E8-40F7-AF11-5716192F18DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91CE8DDF-E5E8-40F7-AF11-5716192F18DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

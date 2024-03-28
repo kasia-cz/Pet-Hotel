@@ -15,4 +15,8 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PetHotel.Application\PetHotel.Application.csproj" />
+  </ItemGroup>
+
 </Project>
