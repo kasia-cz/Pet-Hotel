@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using PetHotel.Data.Context;
+
 namespace PetHotel.WebAPI
 {
     public class Program
@@ -9,6 +12,11 @@ namespace PetHotel.WebAPI
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddDbContext<PetHotelDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
 
             var app = builder.Build();
 
