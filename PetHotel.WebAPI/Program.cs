@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using PetHotel.Application;
+using PetHotel.Application.MappingProfiles;
 using PetHotel.Data.Context;
+using PetHotel.Domain;
 
 namespace PetHotel.WebAPI
 {
@@ -13,10 +16,15 @@ namespace PetHotel.WebAPI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.RegisterApplicationServices();
+            builder.Services.RegisterDomainServices();
+
             builder.Services.AddDbContext<PetHotelDbContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
+
+            builder.Services.AddAutoMapper(typeof(PetTypeMappingProfile));
 
             var app = builder.Build();
 
