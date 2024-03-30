@@ -9,6 +9,7 @@ namespace PetHotel.Application
         public static IServiceCollection RegisterApplicationServices(this IServiceCollection collection)
         {
             collection.AddScoped<IPetTypeAppService, PetTypeAppService>();
+            collection.AddScoped<IUserAppService, UserAppService>();
             return collection;
         }
     }

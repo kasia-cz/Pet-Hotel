@@ -9,6 +9,7 @@ namespace PetHotel.Domain
         public static IServiceCollection RegisterDomainServices(this IServiceCollection collection)
         {
             collection.AddScoped<IPetTypeService, PetTypeService>();
+            collection.AddScoped<IUserService, UserService>();
             return collection;
         }
     }
