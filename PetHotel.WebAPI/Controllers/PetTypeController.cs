@@ -16,9 +16,9 @@ namespace PetHotel.WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<List<PetTypeDTO>>> AddPetType(PetTypeDTO petType)
+        public async Task<ActionResult<List<PetTypeDTO>>> AddPetType(PetTypeDTO petTypeDTO)
         {
-            var result = await _petTypeAppService.AddPetType(petType);
+            var result = await _petTypeAppService.AddPetType(petTypeDTO);
             return Ok(result);
         }
 

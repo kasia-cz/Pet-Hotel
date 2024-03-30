@@ -17,9 +17,9 @@ namespace PetHotel.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<List<PetTypeDTO>> AddPetType(PetTypeDTO petType)
+        public async Task<List<PetTypeDTO>> AddPetType(PetTypeDTO petTypeDTO)
         {
-            var mappedPetType = _mapper.Map<PetType>(petType);
+            var mappedPetType = _mapper.Map<PetType>(petTypeDTO);
             var petTypeList = await _petTypeService.AddPetType(mappedPetType);
 
             return _mapper.Map<List<PetTypeDTO>>(petTypeList);
