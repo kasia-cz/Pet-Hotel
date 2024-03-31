@@ -24,7 +24,8 @@ namespace PetHotel.WebAPI
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            builder.Services.AddAutoMapper(typeof(PetTypeMappingProfile), typeof(UserMappingProfile));
+            builder.Services.AddAutoMapper(typeof(PetTypeMappingProfile), typeof(UserMappingProfile),
+                typeof(PetMappingProfile));
 
             var app = builder.Build();
 

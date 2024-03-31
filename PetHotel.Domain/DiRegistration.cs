@@ -10,6 +10,7 @@ namespace PetHotel.Domain
         {
             collection.AddScoped<IPetTypeService, PetTypeService>();
             collection.AddScoped<IUserService, UserService>();
+            collection.AddScoped<IPetService, PetService>();
             return collection;
         }
     }
