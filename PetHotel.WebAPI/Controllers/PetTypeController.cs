@@ -36,7 +36,7 @@ namespace PetHotel.WebAPI.Controllers
             return Ok(result);
         }
 
-        [HttpPut]
+        [HttpPut("{name}")]
         public async Task<ActionResult<List<PetTypeDTO>>> UpdatePetTypeLimit(string name, int requestLimit)
         {
             var result = await _petTypeAppService.UpdatePetTypeLimit(name, requestLimit);

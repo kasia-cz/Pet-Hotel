@@ -17,9 +17,9 @@ namespace PetHotel.WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<UserDTO>> AddUser(UserDTO user)
+        public async Task<ActionResult<UserDTO>> AddUser(UserDTO userDTO)
         {
-            var result = await _userAppService.AddUser(user);
+            var result = await _userAppService.AddUser(userDTO);
             return Ok(result);
         }
 
@@ -38,9 +38,9 @@ namespace PetHotel.WebAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<UserDTO>> UpdateUser(int id, UserDTO requestUser)
+        public async Task<ActionResult<UserDTO>> UpdateUser(int id, UserDTO requestUserDTO)
         {
-            var result = await _userAppService.UpdateUser(id, requestUser);
+            var result = await _userAppService.UpdateUser(id, requestUserDTO);
             return Ok(result);
         }
 
