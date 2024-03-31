@@ -36,6 +36,11 @@ namespace PetHotel.Domain.Services
             return await _context.PetTypes.ToListAsync();
         }
 
+        public async Task<PetType> GetPetTypeByName(string name)
+        {
+            return await _context.PetTypes.FindAsync(name);
+        }
+
         public async Task<List<PetType>> UpdatePetTypeLimit(string name, int requestLimit)
         {
             var petType = await _context.PetTypes.FindAsync(name);

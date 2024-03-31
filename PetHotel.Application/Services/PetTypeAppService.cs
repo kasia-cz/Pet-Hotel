@@ -39,6 +39,13 @@ namespace PetHotel.Application.Services
             return _mapper.Map<List<PetTypeDTO>>(petTypeList);
         }
 
+        public async Task<PetTypeDTO> GetPetTypeByName(string name)
+        {
+            var petType = await _petTypeService.GetPetTypeByName(name);
+
+            return _mapper.Map<PetTypeDTO>(petType);
+        }
+
         public async Task<List<PetTypeDTO>> UpdatePetTypeLimit(string name, int requestLimit)
         {
             var petTypeList = await _petTypeService.UpdatePetTypeLimit(name, requestLimit);
