@@ -7,7 +7,7 @@ namespace PetHotel.Application.Interfaces
     {
         Task<List<GetUsersPetsDTO>> GetAllUsersPets(int userId);
         Task<PetDTO> GetPetById(int id);
-        Task<PetDTO> AddPet(PetDTO petDTO);
+        Task<PetDTO> AddPet(PetDTO petDTO, int userId);
         Task DeletePet(int id);
         Task<PetDTO> UpdatePet(int id, PetDTO requestPetDTO);
     }

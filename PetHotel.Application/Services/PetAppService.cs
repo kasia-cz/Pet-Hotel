@@ -17,10 +17,11 @@ namespace PetHotel.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<PetDTO> AddPet(PetDTO petDTO)
+        public async Task<PetDTO> AddPet(PetDTO petDTO, int userId)
         {
-            // TO DO: connect Pet with current User (after adding logging) and "selected" PetType
+            // TO DO: connect Pet with current User (after adding logging)
             var mappedPet = _mapper.Map<Pet>(petDTO);
+            mappedPet.UserId = userId; // temporary solution
             await _petService.AddPet(mappedPet);
 
             return petDTO;
