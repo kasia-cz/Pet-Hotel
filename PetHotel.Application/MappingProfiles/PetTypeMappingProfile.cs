@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using PetHotel.Application.DTOs;
+using PetHotel.Application.DTOs.PetDTOs;
 using PetHotel.Data.Entities;
 
 namespace PetHotel.Application.MappingProfiles

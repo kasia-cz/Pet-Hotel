@@ -1,5 +1,4 @@
-﻿using PetHotel.Application.DTOs;
-using PetHotel.Data.Entities;
+﻿using PetHotel.Application.DTOs.PetDTOs;
 
 namespace PetHotel.Application.Interfaces
 {

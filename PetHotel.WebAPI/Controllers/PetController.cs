@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PetHotel.Application.DTOs;
+using PetHotel.Application.DTOs.PetDTOs;
 using PetHotel.Application.Interfaces;
 
 namespace PetHotel.WebAPI.Controllers

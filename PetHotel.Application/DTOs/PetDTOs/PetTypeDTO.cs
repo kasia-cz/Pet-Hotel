@@ -1,4 +1,4 @@
-﻿namespace PetHotel.Application.DTOs
+﻿namespace PetHotel.Application.DTOs.PetDTOs
 {
     public class PetTypeDTO
     {

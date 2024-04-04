@@ -1,6 +1,6 @@
 ﻿using PetHotel.Data.Enums;
 
-namespace PetHotel.Application.DTOs
+namespace PetHotel.Application.DTOs.UserDTOs
 {
     public class UpdateUserRoleDTO
     {
