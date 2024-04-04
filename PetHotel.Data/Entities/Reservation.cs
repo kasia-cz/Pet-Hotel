@@ -10,7 +10,7 @@ namespace PetHotel.Data.Entities
         public ReservationStatus ReservationStatus { get; set; }
 
         public User User { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public List<Pet> Pets { get; set; }
     }
 }

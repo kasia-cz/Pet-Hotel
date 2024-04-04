@@ -1,7 +1,9 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PetHotel.Application;
 using PetHotel.Application.MappingProfiles;
 using PetHotel.Data.Context;
+using PetHotel.Data.Entities;
 using PetHotel.Domain;
 
 namespace PetHotel.WebAPI
@@ -23,6 +25,16 @@ namespace PetHotel.WebAPI
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
+
+            builder.Services.AddAuthorization();
+
+            builder.Services.AddIdentity<User, IdentityRole>(options =>
+            {
+                options.Password.RequiredUniqueChars = 0;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 8;
+
+            }).AddEntityFrameworkStores<PetHotelDbContext>().AddDefaultTokenProviders();
 
             builder.Services.AddAutoMapper(typeof(PetTypeMappingProfile), typeof(UserMappingProfile),
                 typeof(PetMappingProfile));

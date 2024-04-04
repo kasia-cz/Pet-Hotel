@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using PetHotel.Application.DTOs;
 using PetHotel.Data.Entities;
+using PetHotel.Domain.Models;
 
 namespace PetHotel.Application.MappingProfiles
 {
@@ -10,6 +11,8 @@ namespace PetHotel.Application.MappingProfiles
         {
             CreateMap<User, UserDTO>().ReverseMap();
             CreateMap<User, UpdateUserRoleDTO>();
+            CreateMap<LoginDTO, LoginModel>();
+            CreateMap<RegisterDTO, RegisterModel>();
         }
     }
 }

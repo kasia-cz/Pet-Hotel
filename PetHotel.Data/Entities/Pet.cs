@@ -13,7 +13,7 @@
         public string AnotherInformations { get; set; }
 
         public User User { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public List<Reservation> Reservations { get; set; }
     }
 }
