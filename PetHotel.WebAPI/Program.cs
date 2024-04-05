@@ -39,6 +39,8 @@ namespace PetHotel.WebAPI
             builder.Services.AddAutoMapper(typeof(PetTypeMappingProfile), typeof(UserMappingProfile),
                 typeof(PetMappingProfile));
 
+            builder.Services.AddHttpContextAccessor();
+
             var app = builder.Build();
 
             if (app.Environment.IsDevelopment())

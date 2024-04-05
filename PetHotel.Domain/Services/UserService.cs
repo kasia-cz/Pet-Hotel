@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using PetHotel.Data.Context;
 using PetHotel.Data.Entities;
 using PetHotel.Data.Enums;
 using PetHotel.Domain.Interfaces;
 using PetHotel.Domain.Models;
+using System.Security.Claims;
 
 namespace PetHotel.Domain.Services
 {
@@ -12,12 +14,14 @@ namespace PetHotel.Domain.Services
         private readonly PetHotelDbContext _context;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public UserService(PetHotelDbContext context, UserManager<User> userManager, SignInManager<User> signInManager)
+        public UserService(PetHotelDbContext context, UserManager<User> userManager, SignInManager<User> signInManager, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task DeleteUser(string id)
@@ -78,6 +82,11 @@ namespace PetHotel.Domain.Services
         public async Task Logout()
         {
             await _signInManager.SignOutAsync();
+        }
+
+        public string GetCurrentUserId()
+        {
+            return _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
         }
     }
 }

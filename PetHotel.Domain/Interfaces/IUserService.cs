@@ -13,5 +13,6 @@ namespace PetHotel.Domain.Interfaces
         Task Register(RegisterModel model);
         Task Login(LoginModel model);
         Task Logout();
+        string GetCurrentUserId();
     }
 }
