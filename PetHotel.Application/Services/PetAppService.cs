@@ -17,11 +17,9 @@ namespace PetHotel.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<PetDTO> AddPet(PetDTO petDTO, string userId)
+        public async Task<PetDTO> AddPet(PetDTO petDTO)
         {
-            // TO DO: connect Pet with current User (after adding logging)
             var mappedPet = _mapper.Map<Pet>(petDTO);
-            mappedPet.UserId = userId; // temporary solution
             await _petService.AddPet(mappedPet);
 
             return petDTO;
@@ -32,9 +30,9 @@ namespace PetHotel.Application.Services
             await _petService.DeletePet(id);
         }
 
-        public async Task<List<GetUsersPetsDTO>> GetAllUsersPets(string userId)
+        public async Task<List<GetUsersPetsDTO>> GetAllUsersPets()
         {
-            var usersPets = await _petService.GetAllUsersPets(userId);
+            var usersPets = await _petService.GetAllUsersPets();
 
             return _mapper.Map<List<GetUsersPetsDTO>>(usersPets);
         }

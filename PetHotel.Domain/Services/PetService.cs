@@ -8,14 +8,17 @@ namespace PetHotel.Domain.Services
     public class PetService : IPetService
     {
         private readonly PetHotelDbContext _context;
+        private readonly IUserService _userService;
 
-        public PetService(PetHotelDbContext context)
+        public PetService(PetHotelDbContext context, IUserService userService)
         {
             _context = context;
+            _userService = userService;
         }
 
         public async Task<Pet> AddPet(Pet pet)
         {
+            pet.UserId = _userService.GetCurrentUserId();
             _context.Pets.Add(pet);
             await _context.SaveChangesAsync();
 
@@ -29,9 +32,10 @@ namespace PetHotel.Domain.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<List<Pet>> GetAllUsersPets(string userId)
+        public async Task<List<Pet>> GetAllUsersPets()
         {
-            var usersPets = await _context.Pets.Where(p => p.UserId == userId).ToListAsync();
+            var currentUserId = _userService.GetCurrentUserId();
+            var usersPets = await _context.Pets.Where(p => p.UserId == currentUserId).ToListAsync();
             return usersPets;
         }
 
