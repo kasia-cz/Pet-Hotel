@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PetHotel.Application.DTOs.UserDTOs;
 using PetHotel.Application.Interfaces;
 using PetHotel.Data.Enums;
@@ -17,6 +18,7 @@ namespace PetHotel.WebAPI.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<ActionResult> DeleteUser(string id)
         {
             await _userAppService.DeleteUser(id);
@@ -24,6 +26,7 @@ namespace PetHotel.WebAPI.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<UserDTO>> GetUserById(string id)
         {
             var result = await _userAppService.GetUserById(id);
@@ -31,6 +34,7 @@ namespace PetHotel.WebAPI.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<ActionResult<UserDTO>> UpdateUser(string id, UserDTO requestUserDTO)
         {
             var result = await _userAppService.UpdateUser(id, requestUserDTO);
@@ -38,6 +42,7 @@ namespace PetHotel.WebAPI.Controllers
         }
 
         [HttpPut("userRole/{id}")]
+        [Authorize]
         public async Task<ActionResult<UpdateUserRoleDTO>> UpdateUserRole(string id, UserRole requestUserRole)
         {
             var result = await _userAppService.UpdateUserRole(id, requestUserRole);
@@ -59,6 +64,7 @@ namespace PetHotel.WebAPI.Controllers
         }
 
         [HttpPost("logout")]
+        [Authorize]
         public async Task<ActionResult> Logout()
         {
             await _userAppService.Logout();

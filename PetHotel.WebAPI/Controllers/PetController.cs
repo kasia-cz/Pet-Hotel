@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PetHotel.Application.DTOs.PetDTOs;
 using PetHotel.Application.Interfaces;
 
@@ -6,6 +7,7 @@ namespace PetHotel.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class PetController : ControllerBase
     {
         private readonly IPetAppService _petAppService;
