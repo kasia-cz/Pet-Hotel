@@ -8,8 +8,9 @@ namespace PetHotel.Application.MappingProfiles
     {
         public PetMappingProfile()
         {
-            CreateMap<Pet, PetDTO>().ReverseMap();
-            CreateMap<Pet, GetUsersPetsDTO>();
+            CreateMap<Pet, PetDTO>();
+            CreateMap<AddPetDTO, Pet>();
+            CreateMap<Pet, GetUserPetsDTO>();
         }
     }
 }

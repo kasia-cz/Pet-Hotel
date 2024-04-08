@@ -32,7 +32,7 @@ namespace PetHotel.Domain.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<List<Pet>> GetAllUsersPets()
+        public async Task<List<Pet>> GetUserPets()
         {
             var currentUserId = _userService.GetCurrentUserId();
             var usersPets = await _context.Pets.Where(p => p.UserId == currentUserId).ToListAsync();

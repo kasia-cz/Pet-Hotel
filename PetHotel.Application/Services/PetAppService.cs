@@ -17,12 +17,12 @@ namespace PetHotel.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<PetDTO> AddPet(PetDTO petDTO)
+        public async Task<PetDTO> AddPet(AddPetDTO addPetDTO)
         {
-            var mappedPet = _mapper.Map<Pet>(petDTO);
-            await _petService.AddPet(mappedPet);
+            var mappedPet = _mapper.Map<Pet>(addPetDTO);
+            var response = await _petService.AddPet(mappedPet);
 
-            return petDTO;
+            return _mapper.Map<PetDTO>(response);
         }
 
         public async Task DeletePet(int id)
@@ -30,11 +30,11 @@ namespace PetHotel.Application.Services
             await _petService.DeletePet(id);
         }
 
-        public async Task<List<GetUsersPetsDTO>> GetAllUsersPets()
+        public async Task<List<GetUserPetsDTO>> GetUserPets()
         {
-            var usersPets = await _petService.GetAllUsersPets();
+            var usersPets = await _petService.GetUserPets();
 
-            return _mapper.Map<List<GetUsersPetsDTO>>(usersPets);
+            return _mapper.Map<List<GetUserPetsDTO>>(usersPets);
         }
 
         public async Task<PetDTO> GetPetById(int id)
@@ -44,12 +44,12 @@ namespace PetHotel.Application.Services
             return _mapper.Map<PetDTO>(pet);
         }
 
-        public async Task<PetDTO> UpdatePet(int id, PetDTO requestPetDTO)
+        public async Task<PetDTO> UpdatePet(int id, AddPetDTO requestPetDTO)
         {
             var mappedRequestPet = _mapper.Map<Pet>(requestPetDTO);
-            await _petService.UpdatePet(id, mappedRequestPet);
+            var response = await _petService.UpdatePet(id, mappedRequestPet);
 
-            return requestPetDTO;
+            return _mapper.Map<PetDTO>(response);
         }
     }
 }

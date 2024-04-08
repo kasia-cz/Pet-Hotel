@@ -4,7 +4,7 @@ namespace PetHotel.Domain.Interfaces
 {
     public interface IPetService
     {
-        Task<List<Pet>> GetAllUsersPets();
+        Task<List<Pet>> GetUserPets();
         Task<Pet> GetPetById(int id);
         Task<Pet> AddPet(Pet pet);
         Task DeletePet(int id);
