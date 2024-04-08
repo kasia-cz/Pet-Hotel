@@ -36,6 +36,24 @@ namespace PetHotel.Domain.Services
             return reservation;
         }
 
+        public async Task<Reservation> ConfirmReservation(int id)
+        {
+            var reservation = await GetReservationById(id);
+            reservation.ReservationStatus = ReservationStatus.Confirmed;
+            await _context.SaveChangesAsync();
+
+            return reservation;
+        }
+
+        public async Task<Reservation> DeclineReservation(int id)
+        {
+            var reservation = await GetReservationById(id);
+            reservation.ReservationStatus = ReservationStatus.Declined;
+            await _context.SaveChangesAsync();
+
+            return reservation;
+        }
+
         public async Task<List<Reservation>> GetUserReservations()
         {
             var currentUserId = _userService.GetCurrentUserId();

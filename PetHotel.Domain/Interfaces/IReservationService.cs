@@ -9,5 +9,7 @@ namespace PetHotel.Domain.Interfaces
         Task<Reservation> GetReservationById(int id);
         Task<Reservation> AddReservation(Reservation reservation);
         Task<Reservation> CancelReservation(int id);
+        Task<Reservation> ConfirmReservation(int id);
+        Task<Reservation> DeclineReservation(int id);
     }
 }

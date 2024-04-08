@@ -25,10 +25,24 @@ namespace PetHotel.WebAPI.Controllers
             return Ok(result);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("cancel/{id}")]
         public async Task<ActionResult<ReservationDTO>> CancelReservation(int id)
         {
             var result = await _reservationAppService.CancelReservation(id);
+            return Ok(result);
+        }
+
+        [HttpPut("confirm/{id}")]
+        public async Task<ActionResult<ReservationDTO>> ConfirmReservation(int id)
+        {
+            var result = await _reservationAppService.ConfirmReservation(id);
+            return Ok(result);
+        }
+
+        [HttpPut("decline/{id}")]
+        public async Task<ActionResult<ReservationDTO>> DeclineReservation(int id)
+        {
+            var result = await _reservationAppService.DeclineReservation(id);
             return Ok(result);
         }
 

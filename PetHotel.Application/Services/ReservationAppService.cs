@@ -41,6 +41,20 @@ namespace PetHotel.Application.Services
             return _mapper.Map<ReservationDTO>(reservation);
         }
 
+        public async Task<ReservationDTO> ConfirmReservation(int id)
+        {
+            var reservation = await _reservationService.ConfirmReservation(id);
+
+            return _mapper.Map<ReservationDTO>(reservation);
+        }
+
+        public async Task<ReservationDTO> DeclineReservation(int id)
+        {
+            var reservation = await _reservationService.DeclineReservation(id);
+
+            return _mapper.Map<ReservationDTO>(reservation);
+        }
+
         public async Task<List<ReservationDTO>> GetUserReservations()
         {
             var usersReservations = await _reservationService.GetUserReservations();
