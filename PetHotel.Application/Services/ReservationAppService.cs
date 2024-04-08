@@ -29,9 +29,9 @@ namespace PetHotel.Application.Services
                 var pet = await _petService.GetPetById(petId);
                 mappedReservation.Pets.Add(pet);
             }
-            var response = await _reservationService.AddReservation(mappedReservation);
+            var reservation = await _reservationService.AddReservation(mappedReservation);
 
-            return _mapper.Map<ReservationDTO>(response);
+            return _mapper.Map<ReservationDTO>(reservation);
         }
         
         public async Task<ReservationDTO> CancelReservation(int id)

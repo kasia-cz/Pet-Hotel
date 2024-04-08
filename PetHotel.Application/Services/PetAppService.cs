@@ -20,9 +20,9 @@ namespace PetHotel.Application.Services
         public async Task<PetDTO> AddPet(AddPetDTO addPetDTO)
         {
             var mappedPet = _mapper.Map<Pet>(addPetDTO);
-            var response = await _petService.AddPet(mappedPet);
+            var pet = await _petService.AddPet(mappedPet);
 
-            return _mapper.Map<PetDTO>(response);
+            return _mapper.Map<PetDTO>(pet);
         }
 
         public async Task DeletePet(int id)
@@ -47,9 +47,9 @@ namespace PetHotel.Application.Services
         public async Task<PetDTO> UpdatePet(int id, AddPetDTO requestPetDTO)
         {
             var mappedRequestPet = _mapper.Map<Pet>(requestPetDTO);
-            var response = await _petService.UpdatePet(id, mappedRequestPet);
+            var pet = await _petService.UpdatePet(id, mappedRequestPet);
 
-            return _mapper.Map<PetDTO>(response);
+            return _mapper.Map<PetDTO>(pet);
         }
     }
 }

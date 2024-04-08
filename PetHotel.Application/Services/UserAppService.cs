@@ -34,9 +34,9 @@ namespace PetHotel.Application.Services
         public async Task<UserDTO> UpdateUser(string id, UserDTO requestUserDTO)
         {
             var mappedRequestUser = _mapper.Map<User>(requestUserDTO);
-            await _userService.UpdateUser(id, mappedRequestUser);
+            var user = await _userService.UpdateUser(id, mappedRequestUser);
 
-            return requestUserDTO;
+            return _mapper.Map<UserDTO>(user);
         }
 
         public async Task<UpdateUserRoleDTO> UpdateUserRole(string id, UserRole requestUserRole)
