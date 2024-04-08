@@ -19,9 +19,9 @@ namespace PetHotel.WebAPI.Controllers
 
         [HttpDelete("{id}")]
         [Authorize]
-        public async Task<ActionResult> DeleteUser(string id)
+        public async Task<ActionResult> DeleteUser()
         {
-            await _userAppService.DeleteUser(id);
+            await _userAppService.DeleteUser();
             return NoContent();
         }
 
@@ -35,15 +35,15 @@ namespace PetHotel.WebAPI.Controllers
 
         [HttpPut("{id}")]
         [Authorize]
-        public async Task<ActionResult<UserDTO>> UpdateUser(string id, UserDTO requestUserDTO)
+        public async Task<ActionResult<UserDTO>> UpdateUser(UserDTO requestUserDTO)
         {
-            var result = await _userAppService.UpdateUser(id, requestUserDTO);
+            var result = await _userAppService.UpdateUser(requestUserDTO);
             return Ok(result);
         }
 
         [HttpPut("userRole/{id}")]
         [Authorize]
-        public async Task<ActionResult<UpdateUserRoleDTO>> UpdateUserRole(string id, UserRole requestUserRole)
+        public async Task<ActionResult<UserDTO>> UpdateUserRole(string id, UserRole requestUserRole)
         {
             var result = await _userAppService.UpdateUserRole(id, requestUserRole);
             return Ok(result);

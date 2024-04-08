@@ -10,7 +10,6 @@ namespace PetHotel.Application.MappingProfiles
         public UserMappingProfile() 
         {
             CreateMap<User, UserDTO>().ReverseMap();
-            CreateMap<User, UpdateUserRoleDTO>();
             CreateMap<LoginDTO, LoginModel>();
             CreateMap<RegisterDTO, RegisterModel>();
         }
