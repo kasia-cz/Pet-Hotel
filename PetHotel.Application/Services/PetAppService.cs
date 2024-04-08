@@ -32,9 +32,9 @@ namespace PetHotel.Application.Services
 
         public async Task<List<GetUserPetsDTO>> GetUserPets()
         {
-            var usersPets = await _petService.GetUserPets();
+            var userPets = await _petService.GetUserPets();
 
-            return _mapper.Map<List<GetUserPetsDTO>>(usersPets);
+            return _mapper.Map<List<GetUserPetsDTO>>(userPets);
         }
 
         public async Task<PetDTO> GetPetById(int id)
