@@ -36,6 +36,7 @@ namespace PetHotel.Domain.Services
         {
             var currentUserId = _userService.GetCurrentUserId();
             var usersPets = await _context.Pets.Where(p => p.UserId == currentUserId).ToListAsync();
+            
             return usersPets;
         }
 
