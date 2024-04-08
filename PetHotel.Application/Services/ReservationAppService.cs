@@ -54,5 +54,12 @@ namespace PetHotel.Application.Services
 
             return _mapper.Map<ReservationDTO>(reservation);
         }
+
+        public async Task<List<ReservationForAdminDTO>> GetAllReservations(string? reservationStatus, DateTime dateFrom, DateTime dateTo)
+        {
+            var reservations = await _reservationService.GetAllReservations(reservationStatus, dateFrom, dateTo);
+
+            return _mapper.Map<List<ReservationForAdminDTO>>(reservations);
+        }
     }
 }

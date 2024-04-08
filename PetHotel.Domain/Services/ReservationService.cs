@@ -49,5 +49,17 @@ namespace PetHotel.Domain.Services
         {
             return await _context.Reservations.Include(r => r.Pets).FirstOrDefaultAsync(r => r.Id == id);
         }
+
+        public async Task<List<Reservation>> GetAllReservations(string? reservationStatus, DateTime dateFrom, DateTime dateTo)
+        {
+            var reservations = await _context.Reservations.Where(r => 
+                    (String.IsNullOrEmpty(reservationStatus) || r.ReservationStatus.ToString() == reservationStatus) &&
+                    (dateTo.Equals(DateTime.MinValue) || r.StartDate >= dateFrom) &&
+                    (dateTo.Equals(DateTime.MinValue) || r.EndDate <= dateTo))
+                .Include(r => r.User).Include(r => r.Pets)
+                .ToListAsync();
+
+            return reservations;
+        }
     }
 }

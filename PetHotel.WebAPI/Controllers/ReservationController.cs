@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using PetHotel.Application.DTOs.ReservationDTOs;
 using PetHotel.Application.Interfaces;
+using PetHotel.Data.Enums;
 
 namespace PetHotel.WebAPI.Controllers
 {
@@ -42,6 +43,13 @@ namespace PetHotel.WebAPI.Controllers
         public async Task<ActionResult<ReservationDTO>> GetReservationById(int id)
         {
             var result = await _reservationAppService.GetReservationById(id);
+            return Ok(result);
+        }
+
+        [HttpGet("all")]
+        public async Task<ActionResult<List<ReservationForAdminDTO>>> GetAllReservations(string? reservationStatus, DateTime dateFrom, DateTime dateTo)
+        {
+            var result = await _reservationAppService.GetAllReservations(reservationStatus, dateFrom, dateTo);
             return Ok(result);
         }
     }

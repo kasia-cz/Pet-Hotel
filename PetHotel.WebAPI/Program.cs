@@ -37,7 +37,7 @@ namespace PetHotel.WebAPI
             }).AddEntityFrameworkStores<PetHotelDbContext>().AddDefaultTokenProviders();
 
             builder.Services.AddAutoMapper(typeof(PetTypeMappingProfile), typeof(UserMappingProfile),
-                typeof(PetMappingProfile));
+                typeof(PetMappingProfile), typeof(ReservationMappingProfile));
 
             builder.Services.AddHttpContextAccessor();
 
