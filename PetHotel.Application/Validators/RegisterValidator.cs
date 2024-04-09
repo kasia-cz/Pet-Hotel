@@ -9,7 +9,7 @@ namespace PetHotel.Application.Validators
         {
             RuleFor(user => user.Email).NotEmpty().EmailAddress();
             RuleFor(user => user.UserName).NotEmpty().Length(5, 15);
-            RuleFor(user => user.Name).NotEmpty().Length(3, 15);
+            RuleFor(user => user.FirstName).NotEmpty().Length(3, 15);
             RuleFor(user => user.LastName).NotEmpty().Length(3, 30);
             RuleFor(user => user.PhoneNumber).NotEmpty().Length(7, 15);
             RuleFor(user => user.Password).NotEmpty().Length(8, 30);

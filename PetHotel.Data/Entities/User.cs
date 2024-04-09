@@ -5,7 +5,7 @@ namespace PetHotel.Data.Entities
 {
     public class User : IdentityUser
     {
-        public string Name { get; set; } 
+        public string FirstName { get; set; } 
         public string LastName { get; set; }
         public UserRole UserRole { get; set; }
 

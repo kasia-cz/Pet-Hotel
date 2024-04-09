@@ -42,7 +42,7 @@ namespace PetHotel.Domain.Services
 
             user.Email = requestUser.Email;
             user.UserName = requestUser.UserName;
-            user.Name = requestUser.Name;
+            user.FirstName = requestUser.FirstName;
             user.LastName = requestUser.LastName;
             user.PhoneNumber = requestUser.PhoneNumber;
 
@@ -66,7 +66,7 @@ namespace PetHotel.Domain.Services
             {
                 Email = model.Email,
                 UserName = model.UserName,
-                Name = model.Name,
+                FirstName = model.FirstName,
                 LastName = model.LastName,
                 PhoneNumber = model.PhoneNumber,
                 UserRole = UserRole.User,
