@@ -25,6 +25,14 @@ namespace PetHotel.WebAPI.Controllers
             return Ok(result);
         }
 
+        [HttpGet]
+        [Authorize]
+        public async Task<ActionResult<ReturnUserDTO>> GetCurrentUser()
+        {
+            var result = await _userAppService.GetCurrentUser();
+            return Ok(result);
+        }
+
         [HttpPut("{id}")]
         [Authorize]
         public async Task<ActionResult<ReturnUserDTO>> UpdateUser(UpdateUserDTO requestUserDTO)

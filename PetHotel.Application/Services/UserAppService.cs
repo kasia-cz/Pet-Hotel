@@ -26,6 +26,14 @@ namespace PetHotel.Application.Services
             return _mapper.Map<ReturnUserDTO>(user);
         }
 
+        public async Task<ReturnUserDTO> GetCurrentUser()
+        {
+            var user = await _userService.GetCurrentUser();
+
+            return _mapper.Map<ReturnUserDTO>(user);
+
+        }
+
         public async Task<ReturnUserDTO> UpdateUser(UpdateUserDTO requestUserDTO)
         {
             var requestUser = _mapper.Map<User>(requestUserDTO);

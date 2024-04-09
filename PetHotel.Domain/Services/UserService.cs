@@ -29,6 +29,11 @@ namespace PetHotel.Domain.Services
             return await _context.Users.FindAsync(id);
         }
 
+        public async Task<User> GetCurrentUser()
+        {
+            return await _context.Users.FindAsync(GetCurrentUserId());
+        }
+
         public async Task<User> UpdateUser(User requestUser)
         {
             var user = await _context.Users.FindAsync(GetCurrentUserId());
