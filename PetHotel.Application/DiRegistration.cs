@@ -1,6 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using FluentValidation;
+using Microsoft.Extensions.DependencyInjection;
 using PetHotel.Application.Interfaces;
 using PetHotel.Application.Services;
+using System.Reflection;
 
 namespace PetHotel.Application
 {
@@ -12,6 +14,8 @@ namespace PetHotel.Application
             collection.AddScoped<IUserAppService, UserAppService>();
             collection.AddScoped<IPetAppService, PetAppService>();
             collection.AddScoped<IReservationAppService, ReservationAppService>();
+            collection.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
             return collection;
         }
     }

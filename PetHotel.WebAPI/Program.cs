@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PetHotel.Application;
@@ -17,6 +18,8 @@ namespace PetHotel.WebAPI
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddFluentValidationAutoValidation();
 
             builder.Services.RegisterApplicationServices();
             builder.Services.RegisterDomainServices();
