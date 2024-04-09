@@ -6,6 +6,7 @@ namespace PetHotel.Domain.Interfaces
 {
     public interface IUserService
     {
+        Task<List<User>> GetAllUsers();
         Task<User> GetUserById(string id);
         Task<User> GetCurrentUser();
         Task<User> UpdateUser(User requestUser);

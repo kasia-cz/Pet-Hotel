@@ -17,6 +17,14 @@ namespace PetHotel.WebAPI.Controllers
             _userAppService = userAppService;
         }
 
+        [HttpGet]
+        [Authorize]
+        public async Task<ActionResult<List<ReturnUserDTO>>> GetAllUsers()
+        {
+            var result = await _userAppService.GetAllUsers();
+            return Ok(result);
+        }
+
         [HttpGet("{id}")]
         [Authorize]
         public async Task<ActionResult<ReturnUserDTO>> GetUserById(string id)
@@ -25,7 +33,7 @@ namespace PetHotel.WebAPI.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
+        [HttpGet("currentUser")]
         [Authorize]
         public async Task<ActionResult<ReturnUserDTO>> GetCurrentUser()
         {

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using PetHotel.Data.Context;
 using PetHotel.Data.Entities;
 using PetHotel.Data.Enums;
@@ -22,6 +23,11 @@ namespace PetHotel.Domain.Services
             _userManager = userManager;
             _signInManager = signInManager;
             _httpContextAccessor = httpContextAccessor;
+        }
+
+        public async Task<List<User>> GetAllUsers()
+        {
+            return await _context.Users.ToListAsync();
         }
 
         public async Task<User> GetUserById(string id)

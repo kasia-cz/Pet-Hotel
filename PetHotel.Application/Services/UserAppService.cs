@@ -19,6 +19,13 @@ namespace PetHotel.Application.Services
             _mapper = mapper;
         }
 
+        public async Task<List<ReturnUserDTO>> GetAllUsers()
+        {
+            var users = await _userService.GetAllUsers();
+
+            return _mapper.Map<List<ReturnUserDTO>>(users);
+        }
+
         public async Task<ReturnUserDTO> GetUserById(string id)
         {
             var user = await _userService.GetUserById(id);
@@ -31,7 +38,6 @@ namespace PetHotel.Application.Services
             var user = await _userService.GetCurrentUser();
 
             return _mapper.Map<ReturnUserDTO>(user);
-
         }
 
         public async Task<ReturnUserDTO> UpdateUser(UpdateUserDTO requestUserDTO)
@@ -60,6 +66,7 @@ namespace PetHotel.Application.Services
             var loginModel = _mapper.Map<LoginModel>(loginDTO);
             await _userService.Login(loginModel);
         }
+
         public async Task Logout()
         { 
             await _userService.Logout();
