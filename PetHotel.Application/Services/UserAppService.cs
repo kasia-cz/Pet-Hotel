@@ -19,31 +19,26 @@ namespace PetHotel.Application.Services
             _mapper = mapper;
         }
 
-        public async Task DeleteUser()
-        {
-            await _userService.DeleteUser();
-        }
-
-        public async Task<UserDTO> GetUserById(string id)
+        public async Task<ReturnUserDTO> GetUserById(string id)
         {
             var user = await _userService.GetUserById(id);
 
-            return _mapper.Map<UserDTO>(user);
+            return _mapper.Map<ReturnUserDTO>(user);
         }
 
-        public async Task<UserDTO> UpdateUser(UserDTO requestUserDTO)
+        public async Task<ReturnUserDTO> UpdateUser(UpdateUserDTO requestUserDTO)
         {
-            var mappedRequestUser = _mapper.Map<User>(requestUserDTO);
-            var user = await _userService.UpdateUser(mappedRequestUser);
+            var requestUser = _mapper.Map<User>(requestUserDTO);
+            var user = await _userService.UpdateUser(requestUser);
 
-            return _mapper.Map<UserDTO>(user);
+            return _mapper.Map<ReturnUserDTO>(user);
         }
 
-        public async Task<UserDTO> UpdateUserRole(string id, UserRole requestUserRole)
+        public async Task<ReturnUserDTO> UpdateUserRole(string id, UserRole requestUserRole)
         {
             var user = await _userService.UpdateUserRole(id, requestUserRole);
 
-            return _mapper.Map<UserDTO>(user);
+            return _mapper.Map<ReturnUserDTO>(user);
         }
 
         public async Task Register(RegisterDTO registerDTO)

@@ -24,13 +24,6 @@ namespace PetHotel.Domain.Services
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task DeleteUser()
-        {
-            var user = await _context.Users.FindAsync(GetCurrentUserId());
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
-        }
-
         public async Task<User> GetUserById(string id)
         {
             return await _context.Users.FindAsync(id);
@@ -48,7 +41,7 @@ namespace PetHotel.Domain.Services
 
             await _context.SaveChangesAsync();
 
-            return requestUser;
+            return user;
         }
 
         public async Task<User> UpdateUserRole(string id, UserRole requestUserRole)

@@ -5,10 +5,9 @@ namespace PetHotel.Application.Interfaces
 {
     public interface IUserAppService
     {
-        Task<UserDTO> GetUserById(string id);
-        Task DeleteUser();
-        Task<UserDTO> UpdateUser(UserDTO requestUserDTO);
-        Task<UserDTO> UpdateUserRole(string id, UserRole requestUserRole);
+        Task<ReturnUserDTO> GetUserById(string id);
+        Task<ReturnUserDTO> UpdateUser(UpdateUserDTO requestUserDTO);
+        Task<ReturnUserDTO> UpdateUserRole(string id, UserRole requestUserRole);
         Task Register(RegisterDTO registerDTO);
         Task Login(LoginDTO loginDTO);
         Task Logout();
