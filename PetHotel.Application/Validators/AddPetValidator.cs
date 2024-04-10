@@ -3,9 +3,9 @@ using PetHotel.Application.DTOs.PetDTOs;
 
 namespace PetHotel.Application.Validators
 {
-    public class PetValidator : AbstractValidator<AddPetDTO>
+    public class AddPetValidator : AbstractValidator<AddPetDTO>
     {
-        public PetValidator()
+        public AddPetValidator()
         {
             RuleFor(pet => pet.Name).NotEmpty().MaximumLength(30);
             RuleFor(pet => pet.Type).NotEmpty();
