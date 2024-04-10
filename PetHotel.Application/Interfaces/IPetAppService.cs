@@ -4,10 +4,10 @@ namespace PetHotel.Application.Interfaces
 {
     public interface IPetAppService
     {
-        Task<List<GetUserPetsDTO>> GetUserPets();
-        Task<PetDTO> GetPetById(int id);
-        Task<PetDTO> AddPet(AddPetDTO addPetDTO);
+        Task<List<ReturnPetShortDTO>> GetUserPets();
+        Task<ReturnPetDTO> GetPetById(int id);
+        Task<ReturnPetDTO> AddPet(AddPetDTO addPetDTO);
         Task DeletePet(int id);
-        Task<PetDTO> UpdatePet(int id, AddPetDTO requestPetDTO);
+        Task<ReturnPetDTO> UpdatePet(int id, AddPetDTO requestPetDTO);
     }
 }

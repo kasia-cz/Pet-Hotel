@@ -12,6 +12,6 @@ namespace PetHotel.Application.DTOs.ReservationDTOs
         public ReservationStatus ReservationStatus { get; set; }
 
         public ReturnUserDTO User { get; set; }
-        public List<PetDTO> Pets { get; set; }
+        public List<ReturnPetDTO> Pets { get; set; }
     }
 }

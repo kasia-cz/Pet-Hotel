@@ -18,7 +18,7 @@ namespace PetHotel.WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<PetDTO>> AddPet(AddPetDTO addPetDTO)
+        public async Task<ActionResult<ReturnPetDTO>> AddPet(AddPetDTO addPetDTO)
         {
             var result = await _petAppService.AddPet(addPetDTO);
             return Ok(result);
@@ -32,21 +32,21 @@ namespace PetHotel.WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<GetUserPetsDTO>>> GetUserPets()
+        public async Task<ActionResult<List<ReturnPetShortDTO>>> GetUserPets()
         {
             var result = await _petAppService.GetUserPets();
             return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<PetDTO>> GetPetById(int id)
+        public async Task<ActionResult<ReturnPetDTO>> GetPetById(int id)
         {
             var result = await _petAppService.GetPetById(id);
             return Ok(result);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<PetDTO>> UpdatePet(int id, AddPetDTO requestPetDTO)
+        public async Task<ActionResult<ReturnPetDTO>> UpdatePet(int id, AddPetDTO requestPetDTO)
         {
             var result = await _petAppService.UpdatePet(id, requestPetDTO);
             return Ok(result);

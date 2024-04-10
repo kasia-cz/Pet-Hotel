@@ -10,6 +10,6 @@ namespace PetHotel.Application.DTOs.ReservationDTOs
         public DateTime EndDate { get; set; }
         public ReservationStatus ReservationStatus { get; set; }
 
-        public List<GetUserPetsDTO> Pets { get; set; }
+        public List<ReturnPetShortDTO> Pets { get; set; }
     }
 }

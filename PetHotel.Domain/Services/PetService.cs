@@ -35,9 +35,9 @@ namespace PetHotel.Domain.Services
         public async Task<List<Pet>> GetUserPets()
         {
             var currentUserId = _userService.GetCurrentUserId();
-            var usersPets = await _context.Pets.Where(p => p.UserId == currentUserId).ToListAsync();
+            var userPets = await _context.Pets.Where(p => p.UserId == currentUserId).ToListAsync();
             
-            return usersPets;
+            return userPets;
         }
 
         public async Task<Pet> GetPetById(int id)
@@ -60,7 +60,7 @@ namespace PetHotel.Domain.Services
 
             await _context.SaveChangesAsync();
 
-            return requestPet;
+            return pet;
         }
     }
 }

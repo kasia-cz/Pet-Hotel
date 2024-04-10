@@ -1,6 +1,6 @@
 ﻿namespace PetHotel.Application.DTOs.PetDTOs
 {
-    public class GetUserPetsDTO
+    public class ReturnPetShortDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }
