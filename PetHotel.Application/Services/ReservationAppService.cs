@@ -19,61 +19,68 @@ namespace PetHotel.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<ReservationDTO> AddReservation(AddReservationDTO addReservationDTO)
+        public async Task<ReturnReservationForUserDTO> AddReservation(AddReservationDTO addReservationDTO)
         {
-            var mappedReservation = _mapper.Map<Reservation>(addReservationDTO);
-            mappedReservation.Pets = new List<Pet>();
+            var requestReservation = _mapper.Map<Reservation>(addReservationDTO);
+            requestReservation.Pets = new List<Pet>();
 
             foreach (int petId in addReservationDTO.PetsId)
             {
                 var pet = await _petService.GetPetById(petId);
-                mappedReservation.Pets.Add(pet);
+                requestReservation.Pets.Add(pet);
             }
-            var reservation = await _reservationService.AddReservation(mappedReservation);
+            var reservation = await _reservationService.AddReservation(requestReservation);
 
-            return _mapper.Map<ReservationDTO>(reservation);
+            return _mapper.Map<ReturnReservationForUserDTO>(reservation);
         }
         
-        public async Task<ReservationDTO> CancelReservation(int id)
+        public async Task<ReturnReservationForUserDTO> CancelReservation(int id)
         {
             var reservation = await _reservationService.CancelReservation(id);
 
-            return _mapper.Map<ReservationDTO>(reservation);
+            return _mapper.Map<ReturnReservationForUserDTO>(reservation);
         }
 
-        public async Task<ReservationDTO> ConfirmReservation(int id)
+        public async Task<ReturnReservationForAdminDTO> ConfirmReservation(int id)
         {
             var reservation = await _reservationService.ConfirmReservation(id);
 
-            return _mapper.Map<ReservationDTO>(reservation);
+            return _mapper.Map<ReturnReservationForAdminDTO>(reservation);
         }
 
-        public async Task<ReservationDTO> DeclineReservation(int id)
+        public async Task<ReturnReservationForAdminDTO> DeclineReservation(int id)
         {
             var reservation = await _reservationService.DeclineReservation(id);
 
-            return _mapper.Map<ReservationDTO>(reservation);
+            return _mapper.Map<ReturnReservationForAdminDTO>(reservation);
         }
 
-        public async Task<List<ReservationDTO>> GetUserReservations()
+        public async Task<List<ReturnReservationForUserDTO>> GetUserReservations()
         {
-            var usersReservations = await _reservationService.GetUserReservations();
+            var userReservations = await _reservationService.GetUserReservations();
 
-            return _mapper.Map<List<ReservationDTO>>(usersReservations);
+            return _mapper.Map<List<ReturnReservationForUserDTO>>(userReservations);
         }
 
-        public async Task<ReservationDTO> GetReservationById(int id)
+        public async Task<ReturnReservationForUserDTO> GetReservationByIdForUser(int id)
         {
-            var reservation = await _reservationService.GetReservationById(id);
+            var reservation = await _reservationService.GetReservationByIdForUser(id);
 
-            return _mapper.Map<ReservationDTO>(reservation);
+            return _mapper.Map<ReturnReservationForUserDTO>(reservation);
         }
 
-        public async Task<List<ReservationForAdminDTO>> GetAllReservations(string? reservationStatus, DateTime dateFrom, DateTime dateTo)
+        public async Task<ReturnReservationForAdminDTO> GetReservationByIdForAdmin(int id)
+        {
+            var reservation = await _reservationService.GetReservationByIdForAdmin(id);
+
+            return _mapper.Map<ReturnReservationForAdminDTO>(reservation);
+        }
+
+        public async Task<List<ReturnReservationForAdminDTO>> GetAllReservations(string? reservationStatus, DateTime dateFrom, DateTime dateTo)
         {
             var reservations = await _reservationService.GetAllReservations(reservationStatus, dateFrom, dateTo);
 
-            return _mapper.Map<List<ReservationForAdminDTO>>(reservations);
+            return _mapper.Map<List<ReturnReservationForAdminDTO>>(reservations);
         }
     }
 }

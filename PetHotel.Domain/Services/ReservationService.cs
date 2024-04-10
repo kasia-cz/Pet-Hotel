@@ -29,7 +29,7 @@ namespace PetHotel.Domain.Services
 
         public async Task<Reservation> CancelReservation(int id)
         {
-            var reservation = await GetReservationById(id);
+            var reservation = await GetReservationByIdForUser(id);
             reservation.ReservationStatus = ReservationStatus.Cancelled;
             await _context.SaveChangesAsync();
 
@@ -38,7 +38,7 @@ namespace PetHotel.Domain.Services
 
         public async Task<Reservation> ConfirmReservation(int id)
         {
-            var reservation = await GetReservationById(id);
+            var reservation = await GetReservationByIdForAdmin(id);
             reservation.ReservationStatus = ReservationStatus.Confirmed;
             await _context.SaveChangesAsync();
 
@@ -47,7 +47,7 @@ namespace PetHotel.Domain.Services
 
         public async Task<Reservation> DeclineReservation(int id)
         {
-            var reservation = await GetReservationById(id);
+            var reservation = await GetReservationByIdForAdmin(id);
             reservation.ReservationStatus = ReservationStatus.Declined;
             await _context.SaveChangesAsync();
 
@@ -57,15 +57,20 @@ namespace PetHotel.Domain.Services
         public async Task<List<Reservation>> GetUserReservations()
         {
             var currentUserId = _userService.GetCurrentUserId();
-            var usersReservations = await _context.Reservations
+            var userReservations = await _context.Reservations
                 .Where(r => r.UserId == currentUserId).Include(r => r.Pets).ToListAsync();
 
-            return usersReservations;
+            return userReservations;
         }
 
-        public async Task<Reservation> GetReservationById(int id)
+        public async Task<Reservation> GetReservationByIdForUser(int id)
         {
             return await _context.Reservations.Include(r => r.Pets).FirstOrDefaultAsync(r => r.Id == id);
+        }
+
+        public async Task<Reservation> GetReservationByIdForAdmin(int id)
+        {
+            return await _context.Reservations.Include(r => r.User).Include(r => r.Pets).FirstOrDefaultAsync(r => r.Id == id);
         }
 
         public async Task<List<Reservation>> GetAllReservations(string? reservationStatus, DateTime dateFrom, DateTime dateTo)

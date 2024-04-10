@@ -8,9 +8,9 @@ namespace PetHotel.Application.MappingProfiles
     {
         public ReservationMappingProfile() 
         {
-            CreateMap<Reservation, ReservationDTO>();
             CreateMap<AddReservationDTO, Reservation>();
-            CreateMap<Reservation, ReservationForAdminDTO>();
+            CreateMap<Reservation, ReturnReservationForUserDTO>();
+            CreateMap<Reservation, ReturnReservationForAdminDTO>();
         }
     }
 }

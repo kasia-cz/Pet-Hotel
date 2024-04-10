@@ -6,7 +6,8 @@ namespace PetHotel.Domain.Interfaces
     {
         Task<List<Reservation>> GetAllReservations(string? reservationStatus, DateTime dateFrom, DateTime dateTo);
         Task<List<Reservation>> GetUserReservations();
-        Task<Reservation> GetReservationById(int id);
+        Task<Reservation> GetReservationByIdForUser(int id);
+        Task<Reservation> GetReservationByIdForAdmin(int id);
         Task<Reservation> AddReservation(Reservation reservation);
         Task<Reservation> CancelReservation(int id);
         Task<Reservation> ConfirmReservation(int id);
