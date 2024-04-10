@@ -19,8 +19,8 @@ namespace PetHotel.Application.Services
 
         public async Task<List<PetTypeDTO>> AddPetType(PetTypeDTO petTypeDTO)
         {
-            var mappedPetType = _mapper.Map<PetType>(petTypeDTO);
-            var petTypeList = await _petTypeService.AddPetType(mappedPetType);
+            var petType = _mapper.Map<PetType>(petTypeDTO);
+            var petTypeList = await _petTypeService.AddPetType(petType);
 
             return _mapper.Map<List<PetTypeDTO>>(petTypeList);
         }
@@ -48,6 +48,10 @@ namespace PetHotel.Application.Services
 
         public async Task<List<PetTypeDTO>> UpdatePetTypeLimit(string name, int requestLimit)
         {
+            if (requestLimit <= 0) 
+            {
+                throw new Exception("Limit of places must be greater than 0"); // TODO: BadRequestExceptions
+            }
             var petTypeList = await _petTypeService.UpdatePetTypeLimit(name, requestLimit);
 
             return _mapper.Map<List<PetTypeDTO>>(petTypeList);
