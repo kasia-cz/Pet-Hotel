@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PetHotel.Application.DTOs.UserDTOs;
 using PetHotel.Application.Interfaces;
@@ -51,9 +52,9 @@ namespace PetHotel.WebAPI.Controllers
 
         [HttpPut("userRole/{id}")]
         [Authorize]
-        public async Task<ActionResult<ReturnUserDTO>> UpdateUserRole(string id, UserRole requestUserRole)
+        public async Task<ActionResult<ReturnUserDTO>> SetUserRole(string id, string requestUserRole)
         {
-            var result = await _userAppService.UpdateUserRole(id, requestUserRole);
+            var result = await _userAppService.SetUserRole(id, requestUserRole);
             return Ok(result);
         }
 

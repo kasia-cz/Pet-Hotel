@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using PetHotel.Application.DTOs.UserDTOs;
 using PetHotel.Application.Interfaces;
+using PetHotel.Data.Constants;
 using PetHotel.Data.Entities;
-using PetHotel.Data.Enums;
 using PetHotel.Domain.Interfaces;
 using PetHotel.Domain.Models;
 
@@ -48,9 +48,13 @@ namespace PetHotel.Application.Services
             return _mapper.Map<ReturnUserDTO>(user);
         }
 
-        public async Task<ReturnUserDTO> UpdateUserRole(string id, UserRole requestUserRole)
+        public async Task<ReturnUserDTO> SetUserRole(string id, string requestUserRole)
         {
-            var user = await _userService.UpdateUserRole(id, requestUserRole);
+            if(!requestUserRole.Equals(UserConstants.UserRoles.User) && !requestUserRole.Equals(UserConstants.UserRoles.Admin))
+            {
+                throw new Exception("Invalid user role"); // BadRequestException
+            }
+            var user = await _userService.SetUserRole(id, requestUserRole);
 
             return _mapper.Map<ReturnUserDTO>(user);
         }

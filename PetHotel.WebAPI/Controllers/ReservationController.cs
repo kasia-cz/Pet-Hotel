@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using PetHotel.Application.DTOs.ReservationDTOs;
 using PetHotel.Application.Interfaces;
-using PetHotel.Data.Enums;
 
 namespace PetHotel.WebAPI.Controllers
 {

@@ -1,6 +1,4 @@
-﻿using PetHotel.Data.Enums;
-
-namespace PetHotel.Application.DTOs.UserDTOs
+﻿namespace PetHotel.Application.DTOs.UserDTOs
 {
     public class ReturnUserDTO
     {
@@ -10,6 +8,5 @@ namespace PetHotel.Application.DTOs.UserDTOs
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
-        public UserRole UserRole { get; set; }
     }
 }

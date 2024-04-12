@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using PetHotel.Data.Entities;
+using Microsoft.AspNetCore.Identity;
+using PetHotel.Data.Constants;
 
 namespace PetHotel.Data.Context
 {
@@ -16,6 +18,7 @@ namespace PetHotel.Data.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            SetRoles(modelBuilder);
 
             modelBuilder.Entity<Pet>()
                 .HasMany(p => p.Reservations)
@@ -39,6 +42,19 @@ namespace PetHotel.Data.Context
                 .HasOne(r => r.User)
                 .WithMany(u => u.Reservations)
                 .HasForeignKey(r => r.UserId);
+        }
+
+        private void SetRoles(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<IdentityRole>().HasData(
+            new IdentityRole() { 
+                Name = UserConstants.UserRoles.Admin, 
+                NormalizedName = UserConstants.UserRoles.Admin.ToUpper(), 
+                ConcurrencyStamp = "1" },
+            new IdentityRole() { 
+                Name = UserConstants.UserRoles.User, 
+                NormalizedName = UserConstants.UserRoles.User.ToUpper(), 
+                ConcurrencyStamp = "2" });
         }
     }
 }

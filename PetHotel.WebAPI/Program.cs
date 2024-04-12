@@ -37,7 +37,7 @@ namespace PetHotel.WebAPI
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequiredLength = 8;
 
-            }).AddEntityFrameworkStores<PetHotelDbContext>().AddDefaultTokenProviders();
+            }).AddRoles<IdentityRole>().AddEntityFrameworkStores<PetHotelDbContext>().AddDefaultTokenProviders();
 
             builder.Services.AddAutoMapper(typeof(PetTypeMappingProfile), typeof(UserMappingProfile),
                 typeof(PetMappingProfile), typeof(ReservationMappingProfile));

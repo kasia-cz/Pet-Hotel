@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using PetHotel.Data.Constants;
 using PetHotel.Data.Context;
 using PetHotel.Data.Entities;
-using PetHotel.Data.Enums;
 using PetHotel.Domain.Interfaces;
 using PetHotel.Domain.Models;
 using System.Security.Claims;
@@ -55,10 +55,12 @@ namespace PetHotel.Domain.Services
             return user;
         }
 
-        public async Task<User> UpdateUserRole(string id, UserRole requestUserRole)
+        public async Task<User> SetUserRole(string id, string requestUserRole)
         {
             var user = await _context.Users.FindAsync(id);
-            user.UserRole = requestUserRole;
+            var userRoles = await _userManager.GetRolesAsync(user);
+            await _userManager.RemoveFromRolesAsync(user, userRoles);
+            await _userManager.AddToRoleAsync(user, requestUserRole);
             await _context.SaveChangesAsync();
 
             return user;
@@ -72,10 +74,10 @@ namespace PetHotel.Domain.Services
                 UserName = model.UserName,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                PhoneNumber = model.PhoneNumber,
-                UserRole = UserRole.User,
+                PhoneNumber = model.PhoneNumber
             };
             await _userManager.CreateAsync(user, model.Password);
+            await _userManager.AddToRoleAsync(user, UserConstants.UserRoles.User);
         }
 
         public async Task Login(LoginModel model)
