@@ -30,14 +30,14 @@ namespace PetHotel.Application.Services
         {
             var user = await _userService.GetUserById(id);
 
-            return _mapper.Map<ReturnUserDTO>(user);
+            return await MapUserWithRole(user);
         }
 
         public async Task<ReturnUserDTO> GetCurrentUser()
         {
             var user = await _userService.GetCurrentUser();
 
-            return _mapper.Map<ReturnUserDTO>(user);
+            return await MapUserWithRole(user);
         }
 
         public async Task<ReturnUserDTO> UpdateUser(UpdateUserDTO requestUserDTO)
@@ -56,7 +56,7 @@ namespace PetHotel.Application.Services
             }
             var user = await _userService.SetUserRole(id, requestUserRole);
 
-            return _mapper.Map<ReturnUserDTO>(user);
+            return await MapUserWithRole(user);
         }
 
         public async Task Register(RegisterDTO registerDTO)
@@ -74,6 +74,14 @@ namespace PetHotel.Application.Services
         public async Task Logout()
         { 
             await _userService.Logout();
+        }
+
+        private async Task<ReturnUserDTO> MapUserWithRole(User user) 
+        {
+            var userDTO = _mapper.Map<ReturnUserDTO>(user);
+            userDTO.Role = await _userService.GetUserRole(user);
+
+            return userDTO;
         }
     }
 }

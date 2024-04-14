@@ -66,6 +66,12 @@ namespace PetHotel.Domain.Services
             return user;
         }
 
+        public async Task<string> GetUserRole(User user)
+        {
+            var userRoles = await _userManager.GetRolesAsync(user);
+            return userRoles.FirstOrDefault();
+        }
+
         public async Task Register(RegisterModel model)
         {
             var user = new User
