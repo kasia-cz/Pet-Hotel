@@ -4,7 +4,7 @@ namespace PetHotel.Application.Interfaces
 {
     public interface IUserAppService
     {
-        Task<List<ReturnUserDTO>> GetAllUsers();
+        Task<List<ReturnUserShortDTO>> GetAllUsers();
         Task<ReturnUserDTO> GetUserById(string id);
         Task<ReturnUserDTO> GetCurrentUser();
         Task<ReturnUserDTO> UpdateUser(UpdateUserDTO requestUserDTO);

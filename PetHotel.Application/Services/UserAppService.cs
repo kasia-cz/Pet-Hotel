@@ -19,11 +19,11 @@ namespace PetHotel.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<List<ReturnUserDTO>> GetAllUsers()
+        public async Task<List<ReturnUserShortDTO>> GetAllUsers()
         {
             var users = await _userService.GetAllUsers();
 
-            return _mapper.Map<List<ReturnUserDTO>>(users);
+            return _mapper.Map<List<ReturnUserShortDTO>>(users);
         }
 
         public async Task<ReturnUserDTO> GetUserById(string id)

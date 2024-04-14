@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PetHotel.Application.DTOs.UserDTOs;
 using PetHotel.Application.Interfaces;
-using PetHotel.Data.Enums;
 
 namespace PetHotel.WebAPI.Controllers
 {
@@ -20,7 +18,7 @@ namespace PetHotel.WebAPI.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<List<ReturnUserDTO>>> GetAllUsers()
+        public async Task<ActionResult<List<ReturnUserShortDTO>>> GetAllUsers()
         {
             var result = await _userAppService.GetAllUsers();
             return Ok(result);
