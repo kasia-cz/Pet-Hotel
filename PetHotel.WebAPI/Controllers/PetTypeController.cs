@@ -2,12 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using PetHotel.Application.DTOs.PetDTOs;
 using PetHotel.Application.Interfaces;
+using PetHotel.Data.Constants;
 
 namespace PetHotel.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class PetTypeController : ControllerBase
     {
         private readonly IPetTypeAppService _petTypeAppService;
@@ -18,6 +18,7 @@ namespace PetHotel.WebAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = UserConstants.UserRoles.Admin)]
         public async Task<ActionResult<List<PetTypeDTO>>> AddPetType(PetTypeDTO petTypeDTO)
         {
             var result = await _petTypeAppService.AddPetType(petTypeDTO);
@@ -25,6 +26,7 @@ namespace PetHotel.WebAPI.Controllers
         }
 
         [HttpDelete("{name}")]
+        [Authorize(Roles = UserConstants.UserRoles.Admin)]
         public async Task<ActionResult<List<PetTypeDTO>>> DeletePetType(string name)
         {
             var result = await _petTypeAppService.DeletePetType(name);
@@ -32,6 +34,7 @@ namespace PetHotel.WebAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<List<PetTypeDTO>>> GetAllPetTypes()
         {
             var result = await _petTypeAppService.GetAllPetTypes();
@@ -39,6 +42,7 @@ namespace PetHotel.WebAPI.Controllers
         }
 
         [HttpGet("{name}")]
+        [Authorize]
         public async Task<ActionResult<PetTypeDTO>> GetPetTypeByName(string name)
         {
             var result = await _petTypeAppService.GetPetTypeByName(name);
@@ -46,6 +50,7 @@ namespace PetHotel.WebAPI.Controllers
         }
 
         [HttpPut("{name}")]
+        [Authorize(Roles = UserConstants.UserRoles.Admin)]
         public async Task<ActionResult<List<PetTypeDTO>>> UpdatePetTypeLimit(string name, int requestLimit)
         {
             var result = await _petTypeAppService.UpdatePetTypeLimit(name, requestLimit);

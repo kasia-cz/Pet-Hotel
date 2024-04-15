@@ -2,12 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using PetHotel.Application.DTOs.PetDTOs;
 using PetHotel.Application.Interfaces;
+using PetHotel.Data.Constants;
 
 namespace PetHotel.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class PetController : ControllerBase
     {
         private readonly IPetAppService _petAppService;
@@ -18,6 +18,7 @@ namespace PetHotel.WebAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = UserConstants.UserRoles.User)]
         public async Task<ActionResult<ReturnPetDTO>> AddPet(AddPetDTO addPetDTO)
         {
             var result = await _petAppService.AddPet(addPetDTO);
@@ -25,6 +26,7 @@ namespace PetHotel.WebAPI.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = UserConstants.UserRoles.User)]
         public async Task<ActionResult> DeletePet(int id)
         {
             await _petAppService.DeletePet(id);
@@ -32,6 +34,7 @@ namespace PetHotel.WebAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = UserConstants.UserRoles.User)]
         public async Task<ActionResult<List<ReturnPetShortDTO>>> GetUserPets()
         {
             var result = await _petAppService.GetUserPets();
@@ -39,6 +42,7 @@ namespace PetHotel.WebAPI.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<ReturnPetDTO>> GetPetById(int id)
         {
             var result = await _petAppService.GetPetById(id);
@@ -46,6 +50,7 @@ namespace PetHotel.WebAPI.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = UserConstants.UserRoles.User)]
         public async Task<ActionResult<ReturnPetDTO>> UpdatePet(int id, AddPetDTO requestPetDTO)
         {
             var result = await _petAppService.UpdatePet(id, requestPetDTO);

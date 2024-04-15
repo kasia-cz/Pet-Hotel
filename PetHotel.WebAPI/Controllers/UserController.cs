@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using PetHotel.Application.DTOs.UserDTOs;
 using PetHotel.Application.Interfaces;
+using PetHotel.Data.Constants;
 
 namespace PetHotel.WebAPI.Controllers
 {
@@ -17,7 +18,7 @@ namespace PetHotel.WebAPI.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = UserConstants.UserRoles.Admin)]
         public async Task<ActionResult<List<ReturnUserShortDTO>>> GetAllUsers()
         {
             var result = await _userAppService.GetAllUsers();
@@ -25,7 +26,7 @@ namespace PetHotel.WebAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize]
+        [Authorize(Roles = UserConstants.UserRoles.Admin)]
         public async Task<ActionResult<ReturnUserDTO>> GetUserById(string id)
         {
             var result = await _userAppService.GetUserById(id);
@@ -40,7 +41,7 @@ namespace PetHotel.WebAPI.Controllers
             return Ok(result);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
         [Authorize]
         public async Task<ActionResult<ReturnUserDTO>> UpdateUser(UpdateUserDTO requestUserDTO)
         {
@@ -49,7 +50,7 @@ namespace PetHotel.WebAPI.Controllers
         }
 
         [HttpPut("userRole/{id}")]
-        [Authorize]
+        [Authorize(Roles = UserConstants.UserRoles.Admin)]
         public async Task<ActionResult<ReturnUserDTO>> SetUserRole(string id, string requestUserRole)
         {
             var result = await _userAppService.SetUserRole(id, requestUserRole);
