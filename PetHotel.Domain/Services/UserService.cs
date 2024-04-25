@@ -95,13 +95,21 @@ namespace PetHotel.Domain.Services
                 LastName = model.LastName,
                 PhoneNumber = model.PhoneNumber
             };
-            await _userManager.CreateAsync(user, model.Password);
+            var result = await _userManager.CreateAsync(user, model.Password);
+            if (!result.Succeeded)
+            {
+                throw new BadRequestException("Registration failed");
+            }
             await _userManager.AddToRoleAsync(user, UserConstants.UserRoles.User);
         }
 
         public async Task Login(LoginModel model)
         {
-            await _signInManager.PasswordSignInAsync(model.UserName, model.Password, false, false);
+            var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, false, false);
+            if (!result.Succeeded) 
+            {
+                throw new BadRequestException("Login failed");
+            }
         }
 
         public async Task Logout()
