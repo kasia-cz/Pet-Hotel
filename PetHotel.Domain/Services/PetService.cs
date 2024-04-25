@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PetHotel.Data.Context;
 using PetHotel.Data.Entities;
+using PetHotel.Domain.Exceptions;
 using PetHotel.Domain.Interfaces;
 
 namespace PetHotel.Domain.Services
@@ -27,7 +28,7 @@ namespace PetHotel.Domain.Services
 
         public async Task DeletePet(int id)
         {
-            var pet = await _context.Pets.FindAsync(id);
+            var pet = await GetPetById(id);
             _context.Pets.Remove(pet);
             await _context.SaveChangesAsync();
         }
@@ -42,12 +43,17 @@ namespace PetHotel.Domain.Services
 
         public async Task<Pet> GetPetById(int id)
         {
-            return await _context.Pets.FindAsync(id);
+            var pet = await _context.Pets.FindAsync(id);
+            if (pet == null)
+            {
+                throw new BadRequestException("Invalid pet ID");
+            }
+            return pet;
         }
 
         public async Task<Pet> UpdatePet(int id, Pet requestPet)
         {
-            var pet = await _context.Pets.FindAsync(id);
+            var pet = await GetPetById(id);
 
             pet.Name = requestPet.Name;
             pet.Type = requestPet.Type;

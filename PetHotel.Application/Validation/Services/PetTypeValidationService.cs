@@ -1,4 +1,5 @@
 ﻿using PetHotel.Application.Validation.Interfaces;
+using PetHotel.Domain.Exceptions;
 using PetHotel.Domain.Interfaces;
 
 namespace PetHotel.Application.Validation.Services
@@ -19,7 +20,7 @@ namespace PetHotel.Application.Validation.Services
 
             if (!isValid)
             {
-                throw new Exception("Pet type must be selected from PetType list"); // TODO: BadRequestExceptions
+                throw new BadRequestException("Invalid pet type");
             }
         }
     }

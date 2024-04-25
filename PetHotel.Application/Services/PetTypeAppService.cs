@@ -2,6 +2,7 @@
 using PetHotel.Application.DTOs.PetDTOs;
 using PetHotel.Application.Interfaces;
 using PetHotel.Data.Entities;
+using PetHotel.Domain.Exceptions;
 using PetHotel.Domain.Interfaces;
 
 namespace PetHotel.Application.Services
@@ -50,7 +51,7 @@ namespace PetHotel.Application.Services
         {
             if (requestLimit <= 0) 
             {
-                throw new Exception("Limit of places must be greater than 0"); // TODO: BadRequestExceptions
+                throw new BadRequestException("Limit of places must be greater than 0");
             }
             var petTypeList = await _petTypeService.UpdatePetTypeLimit(name, requestLimit);
 

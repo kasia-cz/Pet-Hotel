@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PetHotel.Data.Context;
 using PetHotel.Data.Entities;
+using PetHotel.Domain.Exceptions;
 using PetHotel.Domain.Interfaces;
 
 namespace PetHotel.Domain.Services
@@ -24,7 +25,7 @@ namespace PetHotel.Domain.Services
 
         public async Task<List<PetType>> DeletePetType(string name)
         {
-            var petType = await _context.PetTypes.FindAsync(name);
+            var petType = await GetPetTypeByName(name);
             _context.PetTypes.Remove(petType);
             await _context.SaveChangesAsync();
 
@@ -38,12 +39,17 @@ namespace PetHotel.Domain.Services
 
         public async Task<PetType> GetPetTypeByName(string name)
         {
-            return await _context.PetTypes.FindAsync(name);
+            var petType = await _context.PetTypes.FindAsync(name);
+            if (petType == null)
+            {
+                throw new BadRequestException("Invalid pet type name");
+            }
+            return petType;
         }
 
         public async Task<List<PetType>> UpdatePetTypeLimit(string name, int requestLimit)
         {
-            var petType = await _context.PetTypes.FindAsync(name);
+            var petType = await GetPetTypeByName(name);
             petType.LimitOfPlaces = requestLimit;
             await _context.SaveChangesAsync();
 

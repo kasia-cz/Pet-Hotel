@@ -2,6 +2,7 @@
 using PetHotel.Data.Context;
 using PetHotel.Data.Entities;
 using PetHotel.Data.Enums;
+using PetHotel.Domain.Exceptions;
 using PetHotel.Domain.Interfaces;
 
 namespace PetHotel.Domain.Services
@@ -65,12 +66,22 @@ namespace PetHotel.Domain.Services
 
         public async Task<Reservation> GetReservationByIdForUser(int id)
         {
-            return await _context.Reservations.Include(r => r.Pets).FirstOrDefaultAsync(r => r.Id == id);
+            var reservation = await _context.Reservations.Include(r => r.Pets).FirstOrDefaultAsync(r => r.Id == id);
+            if (reservation == null)
+            {
+                throw new BadRequestException("Invalid reservation ID");
+            }
+            return reservation;
         }
 
         public async Task<Reservation> GetReservationByIdForAdmin(int id)
         {
-            return await _context.Reservations.Include(r => r.User).Include(r => r.Pets).FirstOrDefaultAsync(r => r.Id == id);
+            var reservation = await _context.Reservations.Include(r => r.User).Include(r => r.Pets).FirstOrDefaultAsync(r => r.Id == id);
+            if (reservation == null)
+            {
+                throw new BadRequestException("Invalid reservation ID");
+            }
+            return reservation;
         }
 
         public async Task<List<Reservation>> GetAllReservations(string? reservationStatus, DateTime dateFrom, DateTime dateTo)

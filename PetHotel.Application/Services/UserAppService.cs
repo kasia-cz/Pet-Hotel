@@ -3,6 +3,7 @@ using PetHotel.Application.DTOs.UserDTOs;
 using PetHotel.Application.Interfaces;
 using PetHotel.Data.Constants;
 using PetHotel.Data.Entities;
+using PetHotel.Domain.Exceptions;
 using PetHotel.Domain.Interfaces;
 using PetHotel.Domain.Models;
 
@@ -50,9 +51,9 @@ namespace PetHotel.Application.Services
 
         public async Task<ReturnUserDTO> SetUserRole(string id, string requestUserRole)
         {
-            if(!requestUserRole.Equals(UserConstants.UserRoles.User) && !requestUserRole.Equals(UserConstants.UserRoles.Admin))
+            if (!requestUserRole.Equals(UserConstants.UserRoles.User) && !requestUserRole.Equals(UserConstants.UserRoles.Admin))
             {
-                throw new Exception("Invalid user role"); // BadRequestException
+                throw new BadRequestException("Invalid user role");
             }
             var user = await _userService.SetUserRole(id, requestUserRole);
 

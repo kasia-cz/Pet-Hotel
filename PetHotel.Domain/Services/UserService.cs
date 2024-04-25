@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using PetHotel.Data.Constants;
 using PetHotel.Data.Context;
 using PetHotel.Data.Entities;
+using PetHotel.Domain.Exceptions;
 using PetHotel.Domain.Interfaces;
 using PetHotel.Domain.Models;
 using System.Security.Claims;
@@ -32,17 +33,24 @@ namespace PetHotel.Domain.Services
 
         public async Task<User> GetUserById(string id)
         {
-            return await _context.Users.FindAsync(id);
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
+            {
+                throw new BadRequestException("Invalid user ID");
+            }
+            return user;
         }
 
         public async Task<User> GetCurrentUser()
         {
-            return await _context.Users.FindAsync(GetCurrentUserId());
+            var currentUser = await GetUserById(GetCurrentUserId());
+
+            return currentUser;
         }
 
         public async Task<User> UpdateUser(User requestUser)
         {
-            var user = await _context.Users.FindAsync(GetCurrentUserId());
+            var user = await GetCurrentUser();
 
             user.Email = requestUser.Email;
             user.UserName = requestUser.UserName;
@@ -57,7 +65,7 @@ namespace PetHotel.Domain.Services
 
         public async Task<User> SetUserRole(string id, string requestUserRole)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user = await GetUserById(id);
             var userRoles = await _userManager.GetRolesAsync(user);
             await _userManager.RemoveFromRolesAsync(user, userRoles);
             await _userManager.AddToRoleAsync(user, requestUserRole);
@@ -69,7 +77,12 @@ namespace PetHotel.Domain.Services
         public async Task<string> GetUserRole(User user)
         {
             var userRoles = await _userManager.GetRolesAsync(user);
-            return userRoles.FirstOrDefault();
+            var userRole = userRoles.FirstOrDefault();
+            if (userRole == null)
+            {
+                throw new BadRequestException("Invalid user without a role");
+            }
+            return userRole;
         }
 
         public async Task Register(RegisterModel model)
@@ -98,7 +111,12 @@ namespace PetHotel.Domain.Services
 
         public string GetCurrentUserId()
         {
-            return _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var currentUserId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (currentUserId == null)
+            {
+                throw new BadRequestException("No user logged in");
+            }
+            return currentUserId;
         }
     }
 }
