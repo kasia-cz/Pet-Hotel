@@ -5,6 +5,7 @@ using PetHotel.Application;
 using PetHotel.Data.Context;
 using PetHotel.Data.Entities;
 using PetHotel.Domain;
+using PetHotel.WebAPI.Middlewares;
 
 namespace PetHotel.WebAPI
 {
@@ -53,6 +54,8 @@ namespace PetHotel.WebAPI
             app.UseAuthorization();
 
             app.MapControllers();
+
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.Run();
         }
