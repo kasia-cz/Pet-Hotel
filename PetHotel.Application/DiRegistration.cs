@@ -17,6 +17,7 @@ namespace PetHotel.Application
             collection.AddScoped<IPetAppService, PetAppService>();
             collection.AddScoped<IReservationAppService, ReservationAppService>();
             collection.AddScoped<IPetTypeValidationService, PetTypeValidationService>();
+            collection.AddAutoMapper(Assembly.GetExecutingAssembly());
             collection.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
             return collection;

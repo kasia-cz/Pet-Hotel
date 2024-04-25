@@ -2,7 +2,6 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PetHotel.Application;
-using PetHotel.Application.MappingProfiles;
 using PetHotel.Data.Context;
 using PetHotel.Data.Entities;
 using PetHotel.Domain;
@@ -38,9 +37,6 @@ namespace PetHotel.WebAPI
                 options.Password.RequiredLength = 8;
 
             }).AddRoles<IdentityRole>().AddEntityFrameworkStores<PetHotelDbContext>().AddDefaultTokenProviders();
-
-            builder.Services.AddAutoMapper(typeof(PetTypeMappingProfile), typeof(UserMappingProfile),
-                typeof(PetMappingProfile), typeof(ReservationMappingProfile));
 
             builder.Services.AddHttpContextAccessor();
 
