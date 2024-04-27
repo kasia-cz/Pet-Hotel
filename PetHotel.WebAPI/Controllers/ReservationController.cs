@@ -75,9 +75,9 @@ namespace PetHotel.WebAPI.Controllers
 
         [HttpGet("all")]
         [Authorize(Roles = UserConstants.UserRoles.Admin)]
-        public async Task<ActionResult<List<ReturnReservationForAdminDTO>>> GetAllReservations(string? reservationStatus, DateTime dateFrom, DateTime dateTo)
+        public async Task<ActionResult<List<ReturnReservationForAdminDTO>>> GetAllReservations(string? reservationStatus, DateTime startDate, DateTime endDate)
         {
-            var result = await _reservationAppService.GetAllReservations(reservationStatus, dateFrom, dateTo);
+            var result = await _reservationAppService.GetAllReservations(reservationStatus, startDate, endDate);
             return Ok(result);
         }
     }

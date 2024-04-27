@@ -4,7 +4,7 @@ namespace PetHotel.Application.Interfaces
 {
     public interface IReservationAppService
     {
-        Task<List<ReturnReservationForAdminDTO>> GetAllReservations(string? reservationStatus, DateTime dateFrom, DateTime dateTo);
+        Task<List<ReturnReservationForAdminDTO>> GetAllReservations(string? reservationStatus, DateTime startDate, DateTime endDate);
         Task<List<ReturnReservationForUserDTO>> GetUserReservations();
         Task<ReturnReservationForUserDTO> GetReservationByIdForUser(int id);
         Task<ReturnReservationForAdminDTO> GetReservationByIdForAdmin(int id);

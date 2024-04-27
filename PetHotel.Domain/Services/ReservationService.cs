@@ -84,12 +84,12 @@ namespace PetHotel.Domain.Services
             return reservation;
         }
 
-        public async Task<List<Reservation>> GetAllReservations(string? reservationStatus, DateTime dateFrom, DateTime dateTo)
+        public async Task<List<Reservation>> GetAllReservations(string? reservationStatus, DateTime startDate, DateTime endDate)
         {
-            var reservations = await _context.Reservations.Where(r => 
+            var reservations = await _context.Reservations.Where(r =>
                     (String.IsNullOrEmpty(reservationStatus) || r.ReservationStatus == Enum.Parse<ReservationStatus>(reservationStatus)) &&
-                    (dateTo.Equals(DateTime.MinValue) || r.StartDate >= dateFrom) &&
-                    (dateTo.Equals(DateTime.MinValue) || r.EndDate <= dateTo))
+                    (startDate.Equals(DateTime.MinValue) || r.EndDate >= startDate) &&
+                    (endDate.Equals(DateTime.MinValue) || r.StartDate <= endDate))
                 .Include(r => r.User).Include(r => r.Pets)
                 .ToListAsync();
 

@@ -4,7 +4,7 @@ namespace PetHotel.Domain.Interfaces
 {
     public interface IReservationService
     {
-        Task<List<Reservation>> GetAllReservations(string? reservationStatus, DateTime dateFrom, DateTime dateTo);
+        Task<List<Reservation>> GetAllReservations(string? reservationStatus, DateTime startDate, DateTime endDate);
         Task<List<Reservation>> GetUserReservations();
         Task<Reservation> GetReservationByIdForUser(int id);
         Task<Reservation> GetReservationByIdForAdmin(int id);

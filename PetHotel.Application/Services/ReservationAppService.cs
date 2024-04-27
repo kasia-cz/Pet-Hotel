@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using PetHotel.Application.DTOs.ReservationDTOs;
 using PetHotel.Application.Interfaces;
+using PetHotel.Application.Validation.Interfaces;
 using PetHotel.Data.Entities;
 using PetHotel.Domain.Interfaces;
 
@@ -9,12 +10,14 @@ namespace PetHotel.Application.Services
     public class ReservationAppService : IReservationAppService
     {
         private readonly IReservationService _reservationService;
+        private readonly IReservationValidationService _reservationValidationService;
         private readonly IPetService _petService;
         private readonly IMapper _mapper;
 
-        public ReservationAppService(IReservationService reservationService, IPetService petService, IMapper mapper)
+        public ReservationAppService(IReservationService reservationService, IReservationValidationService reservationValidationService, IPetService petService, IMapper mapper)
         {
             _reservationService = reservationService;
+            _reservationValidationService = reservationValidationService;
             _petService = petService;
             _mapper = mapper;
         }
@@ -29,6 +32,7 @@ namespace PetHotel.Application.Services
                 var pet = await _petService.GetPetById(petId);
                 requestReservation.Pets.Add(pet);
             }
+            await _reservationValidationService.ValidateReservation(requestReservation);
             var reservation = await _reservationService.AddReservation(requestReservation);
 
             return _mapper.Map<ReturnReservationForUserDTO>(reservation);
@@ -76,9 +80,9 @@ namespace PetHotel.Application.Services
             return _mapper.Map<ReturnReservationForAdminDTO>(reservation);
         }
 
-        public async Task<List<ReturnReservationForAdminDTO>> GetAllReservations(string? reservationStatus, DateTime dateFrom, DateTime dateTo)
+        public async Task<List<ReturnReservationForAdminDTO>> GetAllReservations(string? reservationStatus, DateTime startDate, DateTime endDate)
         {
-            var reservations = await _reservationService.GetAllReservations(reservationStatus, dateFrom, dateTo);
+            var reservations = await _reservationService.GetAllReservations(reservationStatus, startDate, endDate);
 
             return _mapper.Map<List<ReturnReservationForAdminDTO>>(reservations);
         }
